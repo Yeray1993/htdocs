@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.form-inline {
+				margin: 20px;
+				display: flex;
+				flex-flow: row wrap;
+				align-items: center;
+			}
+			label {
+				margin-right: 10px;
+			}
+			.mensajesDeError {
+				margin-right: 20px;
+				color: red;
+				display: none;
+			}
+		</style>
+		<script>
+			function comprobarPassword() {
+				value_password = document.getElementById("password").value;
+				if (value_password.length < 2) {
+					document.getElementById("password").style.backgroundColor = "red";
+					document.getElementById("password_error").style.display = "block";
+					return;
+				}
+				value_repassword = document.getElementById("repassword").value;
+				if (value_password != value_repassword) {
+					alert("No iguales");
+					return;
+				}
+				form = document.getElementById("elForm");
+				form.action = "recoger_datos.php";
+				form.target = "_blank";
+				form.submit();
+			}
+		</script>
+	</head>
+	<body>
+		<form method="post" id="elForm">
+			<div class="form-inline">
+				<label for="nombre">Nombre:</label>
+				<input type="text" name="nombre" id="nombre" placeholder="Juan" value="Juan" required />
+				<div class="mensajesDeError"><p>Falta el nombre</p></div>
+			</div>
+			<div class="form-inline">
+				<label>Edad:</label>
+				<input type="number" name="edad" id="edad" placeholder="20" value="15" />
+				<div class="mensajesDeError"><p>Falta la edad</p></div>
+			</div>
+			<div class="form-inline">
+				<label>Email:</label>
+				<input type="email" name="email" id="email" placeholder="cosa@gmail.com" value="cosa@gmail.com" />
+				<div class="mensajesDeError"><p>El email ta pocho</p></div>
+			</div>
+			<div class="form-inline">
+				<label>CP:</label>
+				<input type="number" name="cp" id="cp" placeholder="080500" value="080500" />
+				<div class="mensajesDeError"><p>CP no valido</p></div>
+			</div>
+			<div class="form-inline">
+				<label>Password:</label>
+				<input type="password" id="password" value="asd" />
+				<div class="mensajesDeError" id="password_error"><p>La contraseña es muy corta</p></div>
+			</div>
+			<div class="form-inline">
+				<label>Re-Password:</label>
+				<input type="password" name="password" id="repassword" />
+				<div class="mensajesDeError"><p>Las contraseñas no coinciden</p></div>
+			</div>
+			<div>
+				<!-- <input type="submit" value="Enviar" /> -->
+			</div>
+		</form>
+		<button onclick="comprobarPassword()">Send</button>
+	</body>
+</html>
